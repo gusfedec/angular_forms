@@ -3,6 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   { 
+    path: 'selector',
+    loadChildren: () => import('./paises/paises.module').then( m => m.PaisesModule )
+  },
+  { 
     path: 'template',
     loadChildren: () => import('./template/template.module').then( m => m.TemplateModule )
   },
@@ -21,11 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
