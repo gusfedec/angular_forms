@@ -60,7 +60,21 @@
         </div>
     </div>
 
-
+    <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">Checkboxes</label>
+        <div class="col-sm-9">
+            <div *ngFor="let item of MoviesData; let i=index">
+                <label>
+                <input type="checkbox" [value]="item.name" (change)="onCheckboxChange($event)" />
+                {{item.value}}
+                </label>
+            </div>
+            <span class="form-text text-danger"
+                    *ngIf="checkObligatorio()">
+                   Este campo es obligatorio
+            </span>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-sm-12">
