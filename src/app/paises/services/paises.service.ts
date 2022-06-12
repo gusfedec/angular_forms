@@ -10,7 +10,8 @@ import { PaisSmall, Pais } from '../interfaces/paises.interface';
 })
 export class PaisesService {
 
-  private baseUrl: string = 'https://restcountries.com/v2'
+  private baseUrl: string = 'https://restcountries.com/v3.1'
+  private baseUrlV2: string = 'https://restcountries.com/v2'
   private _regiones: string[] = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 
   get regiones(): string[] {
@@ -21,7 +22,7 @@ export class PaisesService {
 
   getPaisesPorRegion( region: string ): Observable<PaisSmall[]> {
 
-    const url: string = `${ this.baseUrl }/region/${ region }?fields=alpha3Code;name`
+    const url: string = `${ this.baseUrl }/region/${ region }?fields=cca3,name`
     return this.http.get<PaisSmall[]>( url );
   }
 
@@ -31,16 +32,17 @@ export class PaisesService {
       return of(null)
     }
 
-    const url = `${ this.baseUrl }/alpha/${ codigo }`;
+    const url = `${ this.baseUrlV2 }/alpha/${ codigo }`;
     return this.http.get<Pais>( url );
   }
 
   getPaisPorCodigoSmall( codigo: string ): Observable<PaisSmall> {
-    const url = `${ this.baseUrl }/alpha/${ codigo }?fields=alpha3Code;name`;
+    const url = `${ this.baseUrl }/alpha/${ codigo }?fields=cca3,name`;
     return this.http.get<PaisSmall>( url );
   }
 
   getPaisesPorCodigos( borders: string[] ): Observable<PaisSmall[]> {
+console.log(borders);
 
     if ( !borders ) {
       return of([]);

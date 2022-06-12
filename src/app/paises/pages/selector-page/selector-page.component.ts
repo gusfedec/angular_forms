@@ -64,6 +64,8 @@ export class SelectorPageComponent implements OnInit {
       )
       .subscribe( paises => {
         // this.fronteras = pais?.borders || [];
+        console.log(paises);
+        
         this.fronteras = paises;
         this.cargando = false;
       })
